@@ -6,14 +6,17 @@ missing alt text, and an approximate word count.
 
 ## AI tool use
 
-I used Claude (Anthropic) to help scaffold the Flask app structure,
-write the initial parsing/validation logic in `app/audit.py`, and draft
-the test suite in `tests/test_audit.py`. I reviewed and ran every test
-myself, caught and fixed two bugs in the process (a URL-scheme handling
-bug that mishandled `ftp://` links, and a word-count bug that was
-incorrectly including `<title>` text as page content), and made the
-architecture call to separate parsing logic from Flask routing myself
-based on wanting the logic independently testable.
+I used Claude (Anthropic) to scaffold this project — the Flask app
+structure, the initial URL validation/parsing logic in app/audit.py,
+the frontend, and the test suite. I reviewed the generated code
+line by line, ran the full test suite myself, and caught two real
+bugs during testing (a URL-scheme handling issue with ftp:// links,
+and a word-count bug that was incorrectly counting <title> text as
+page content). I made the call to separate the parsing logic from
+the Flask routes so it could be unit tested independently. I also
+handled the actual deployment myself, including diagnosing and
+fixing a gunicorn start-command mismatch (app:app vs run:app) that
+was causing the live deploy to fail on Render.
 
 ## Setup
 
